@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+
+.jumbotron {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #eee;
+}
+
+.container {
+  perspective: 1000px;
+  margin-bottom: 30px;
+}
+
+.row {
+  display: flex;
+}
+
+.screen {
+  background-color: rgb(93, 87, 87);
+  height: 20px;
+  width: 80%;
+  margin: 15px 0;
+  transform: rotateX(60deg); 
+}

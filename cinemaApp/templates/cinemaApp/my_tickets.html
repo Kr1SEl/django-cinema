@@ -1,0 +1,25 @@
+{% extends 'cinemaApp/base.html' %} 
+
+{% block content %}
+
+<center>
+    <h1>My Tickets</h1>
+</center>
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for ticket in tickets %}
+    <div class="col">
+        <div class = "card">
+            <img src="{{ ticket.session.session_image.url }}" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">{{ticket.session.name}}</h5>
+                <p class="card-text">Place: {{ticket.placeNumber}}</p>
+                <p class="card-text">Start time: {{ticket.session.start_time}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<br>
+{% endblock %}

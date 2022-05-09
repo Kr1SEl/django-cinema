@@ -1,0 +1,55 @@
+{% extends 'cinemaApp/base.html' %} 
+
+{% block content %}
+
+    <center>
+        <h1>Avaliable Sessions</h1>
+    </center>
+    <br/>
+    <div class = "row">
+        <div class = "column">
+                <form method = "GET">
+                    {% load bootstrap4 %}
+                    {% bootstrap_javascript jquery='full' %}
+                    {{filter.form.as_p}}
+                    {{filter.form.media}}
+                    <button class = "btn btn-primary" type="submit">Search</button>
+                </form>
+        </div>
+    </div>
+    <br/>
+    {% for session in sessions %}
+        <div class="container card mb-3" onclick="window.location='{% url 'show-session' session.id %}';">
+            <div class="row g-0">
+                <div class="col-md-4">
+                <img src="{{ session.session_image.url }}" class="img-fluid rounded-start">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{session}}</h5>
+                    <p class="card-text"><strong>Description:</strong> {{session.description}}</p>
+                    <p class="card-text"><small class="text-muted">Start Time: {{session.start_time}}</small></p>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <br/><br/>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+        {% if sessions.has_previous%}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{sessions.previous_page_number}}">Previous</a></li>
+
+        {% endif %} 
+            <li class="page-item disabled"><a class="page-link" href="#">Page {{sessions.number}} of {{sessions.paginator.num_pages}}</a></li>
+
+        {% if sessions.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{sessions.next_page_number}}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{sessions.paginator.num_pages}}">Last &raquo</a></li>
+        {% endif %}
+        </ul>
+    </nav>
+<br/><br/>
+{% endblock %}

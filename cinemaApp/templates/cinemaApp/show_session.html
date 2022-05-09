@@ -1,0 +1,124 @@
+{% extends 'cinemaApp/base.html' %} 
+
+{% block content %}
+{% load static %}
+    <center>
+        <h1>Book Tickets</h1>
+    </center>
+    <div class="container">
+
+        <div class="row g-0">
+            <div class="col-md-4">
+                <div class="card" style="width: 90%;">
+                <img src="{{ session.session_image.url }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{session}}</h5>
+                    <p class="card-text"><strong>Description:</strong> {{session.description}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><small class="text-muted">Start Time: {{session.start_time}}</small></li>
+                    <li class="list-group-item"><small class="text-muted">Start Time: {{session.end_time}}</small></li>
+                    <li class="list-group-item">A third item</li>
+                </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+
+
+        {% comment %} <div class="row g-0">
+            <div class="col-md-4">
+            <img src="{{ session.session_image.url }}" class="img-fluid rounded-start">
+            </div>
+            <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{session}}</h5>
+                <p class="card-text"><strong>Description:</strong> {{session.description}}</p>
+                <p class="card-text"><small class="text-muted">Start Time: {{session.start_time}}</small></p> {% endcomment %}
+                {% comment %} <div class="container">
+                    <br> {% endcomment %}
+                    {% comment %} <div class="jumbotron">
+                        {% for seat in seats %}
+                            {% if not seat.isAvaliable %}
+                                <input type="image" onclick="bookSeat(this.id)" disabled = true id="{{seat}}" value="{{seat.placeNumber}}" src="{% static 'bk.png' %}" style="height: 30px; width: 30px;"/>
+                            {% else %}
+                                <input type="image" onclick="bookSeat(this.id)"  id="{{seat}} free" value="{{seat.placeNumber}}" src="{% static 'seat.png' %}" style="height: 30px; width: 30px;"/>
+                            {% endif %}
+                        {% endfor %}
+                    </div> {% endcomment %}
+                    <center>
+                        <div class="container">
+                            <div class="screen"></div>
+                            <h4><small class="text-muted">SCREEN</small></h4>
+                            <br>
+                        {% for i in 'aaaaaa' %}
+                        <div>
+                            {% for i in 'aaa' %}
+                            <input type="image" onclick="bookSeat(this.id)" disabled = true id="{{seat}}" value="{{seat.placeNumber}}" src="{% static 'bk.png' %}" style="height: 30px; width: 30px;"/>
+                            {% endfor %}
+                        </div>
+                        {% endfor %}
+                    </center>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <label for="form-control" style="font-weight: bold;">Seat Numbers:</label>
+                        <input type="text" readonly="readonly"  class="form-control" id="demo" name="booked_seats" value="">
+                        <label for="form-control" style="font-weight: bold;">Number of Seats:</label>
+                        <input type="text" readonly="readonly" class="form-control" id="count" name="count" value="">
+                        <br>
+                    <div class="container">
+                        <center>
+                            <input type="submit" class="btn btn-success" value="Confirm Booking" style="width: 100%;">
+                        </center>
+                    </form>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <script>
+                function bookSeat(id)
+                {
+                    let place = document.getElementById(id).value;
+                    if(id == (place + ' is available free')){
+                        document.getElementById('demo').value += document.getElementById(id).value+" | ";
+                        document.getElementById(id).src = "{% static 'booked.png' %}";
+                        document.getElementById(id).id = place + ' is available chosen'
+                        var val = document.getElementById("count").value;
+                        if(val)
+                        {
+                            val = parseInt(val)+1;
+                            document.getElementById("count").value = val;
+                        }
+                        else{
+                            document.getElementById("count").value = 1;
+                        }
+                    }else{
+                        var booked = document.getElementById('demo').value.split(' | ');
+                        value = document.getElementById(id).value
+                        var newBooked = '';
+                        for (let i = 0; i < booked.length; i++) {
+                            if(booked[i] != value && booked[i].match(/^-?\d+$/)){
+                                newBooked += booked[i] + " | ";
+                            }
+                        }
+                        document.getElementById('demo').value = newBooked;
+                        document.getElementById(id).src = "{% static 'seat.png' %}";
+                        document.getElementById(id).id = place + ' is available free'
+                        var val = document.getElementById("count").value;
+                        if(val)
+                        {
+                            val = parseInt(val)-1;
+                            document.getElementById("count").value = val;
+                        }
+                        else{
+                            document.getElementById("count").value = 0;
+                        }
+                    }
+                }
+            </script>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %} 
