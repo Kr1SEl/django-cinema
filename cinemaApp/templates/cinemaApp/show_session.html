@@ -6,7 +6,6 @@
         <h1>Book Tickets</h1>
     </center>
     <div class="container">
-
         <div class="row g-0">
             <div class="col-md-4">
                 <div class="card" style="width: 90%;">
@@ -23,35 +22,12 @@
                 </div>
             </div>
             <div class="col-md-8">
-
-
-        {% comment %} <div class="row g-0">
-            <div class="col-md-4">
-            <img src="{{ session.session_image.url }}" class="img-fluid rounded-start">
-            </div>
-            <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">{{session}}</h5>
-                <p class="card-text"><strong>Description:</strong> {{session.description}}</p>
-                <p class="card-text"><small class="text-muted">Start Time: {{session.start_time}}</small></p> {% endcomment %}
-                {% comment %} <div class="container">
-                    <br> {% endcomment %}
-                    {% comment %} <div class="jumbotron">
-                        {% for seat in seats %}
-                            {% if not seat.isAvaliable %}
-                                <input type="image" onclick="bookSeat(this.id)" disabled = true id="{{seat}}" value="{{seat.placeNumber}}" src="{% static 'bk.png' %}" style="height: 30px; width: 30px;"/>
-                            {% else %}
-                                <input type="image" onclick="bookSeat(this.id)"  id="{{seat}} free" value="{{seat.placeNumber}}" src="{% static 'seat.png' %}" style="height: 30px; width: 30px;"/>
-                            {% endif %}
-                        {% endfor %}
-                    </div> {% endcomment %}
                     <center>
                         <br>
                         <div class="container">
                             <div class="screen"></div>
                             <h4><small class="text-muted">SCREEN</small></h4>
                             <br>
-                        
                             {% for row in cinemaHall %}
                             <div>
                             {% for seat in row.1 %}
@@ -63,15 +39,6 @@
                             {% endfor %}
                             </div>
                             {% endfor %}
-                        
-                        {% comment %} {% endfor %} {% endcomment %}
-                        {% comment %} {% for i in 'aaaaaa' %}
-                        <div>
-                            {% for i in 'aaa' %}
-                                <input type="image" onclick="bookSeat(this.id)"  id="{{seat}} free" value="{{seat.placeNumber}}" src="{% static 'seat.png' %}" style="height: 30px; width: 30px;"/>
-                            {% endfor %}
-                        </div>
-                        {% endfor %} {% endcomment %}
                     </center>
                     <form method="POST">
                         {% csrf_token %}

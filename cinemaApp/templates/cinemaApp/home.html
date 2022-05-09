@@ -2,15 +2,39 @@
 
 {% block content %}
     <style>
-        body {background-image: url('static/background.jpg');
-            background-repeat: no-repeat;
-            background-size: cover;}
-    </style>
-    <center>
-        <div class="shadow p-4 mb-5 bg-body rounded">
-            <p style = "font-family:georgia,garamond,serif;font-size:76px;font-style:italic;color:black;">
-            Super Cinema
-            </p>
-        </div>
-    </center>
+        @import url('https://fonts.googleapis.com/css?family=Koulen&display=swap');
+
+        body {
+        background-image: url('static/background.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: #fdfdfe;
+        }
+
+        h1 {
+        font-family: "Koulen", display;
+        font-size: 250px !important;
+        font-weight: bold;
+        color: transparent;
+        background-image: linear-gradient(to right, #553c9a, #ee4b2b, #00c2cb, #ff7f50, #553c9a);
+        -webkit-background-clip: text;
+        background-clip: text;
+        background-size: 200%;
+        background-position: -200%;
+        animation: animated-gradient 2s infinite alternate-reverse;
+        }
+
+        @keyframes animated-gradient {
+        to {
+            background-position: 200%;
+        }
+        }
+    </style> 
+    <div>
+        <header>
+            <center>
+            <h1 class='h1'>SUPER CINEMA</h1>
+            </center>
+        </header>
+    </div>
 {% endblock %}

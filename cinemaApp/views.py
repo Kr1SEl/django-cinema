@@ -30,7 +30,6 @@ def add_session(request):
     return render(request, 'cinemaApp/add_session.html', {'form': form, 'submitted': submitted})
 
 
-# Todo make check for time
 def my_tickets(request):
     if request.user.is_authenticated:
         tickets = Place.objects.filter(
