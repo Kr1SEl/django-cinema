@@ -1,8 +1,8 @@
 {% extends 'cinemaApp/base.html' %} 
 
 {% block content %}
-    {% if user.is_superuser%}
-        <div class="shadow p-4 mb-5 bg-body rounded">
+    {% if user.is_staff %}
+        <div class="shadow p-4 mb-5 bg-body">
             <center>
                 <h1>Add Session</h1>
             </center>
@@ -16,7 +16,9 @@
                     {% bootstrap_javascript jquery='full' %}
                     {{ form.as_p }}
                     {{ form.media }}
-                    <input type="submit", value="Submit", class="btn btn-secondary">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <input type="submit", value="Submit", class="btn btn-primary">
+                    </div>
                 </form>
                 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
                 <script>

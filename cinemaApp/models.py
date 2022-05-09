@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 from datetime import datetime
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.translation import gettext_lazy as _
 
 
@@ -14,10 +15,16 @@ class Cinema(models.Model):
 
 class Hall(models.Model):
     cinema = models.ForeignKey(Cinema, on_delete=models.CASCADE)
-    sitPlaces = models.IntegerField()
+    sitRows = models.IntegerField(validators=[MinValueValidator(1)])
+    sitColumns = models.IntegerField(
+        validators=[MaxValueValidator(20), MinValueValidator(1)])
 
     def __str__(self):
-        return f'Cinema: {self.cinema} hall. Sit Places {self.sitPlaces}'
+        return f'Cinema: {self.cinema} hall. Sit Rows {self.sitRows}, sit columns {self.sitColumns}'
+
+    @property
+    def numberOfPlaces(self):
+        return self.sitRows * self.sitColumns
 
 
 class Session(models.Model):
@@ -34,8 +41,9 @@ class Session(models.Model):
             raise ValidationError(
                 {'end_time': _('End time must be bigger than the start time!')})
 
-    def alreadyPassed(self):
-        return datetime.now() > self.end_time
+    @property
+    def isActive(self):
+        return datetime.now() < self.end_time
 
     def __str__(self):
         return self.name

@@ -1,4 +1,4 @@
 <option value="">---------</option>
 {% for hall in halls %}
-<option value="{{ hall.pk }}">Sit Places: {{ hall.sitPlaces}}</option>
+<option value="{{ hall.pk }}">Sit Rows: {{ hall.sitRows }}. Sit columns: {{ hall.sitColumns }}. Number of places: {{ hall.numberOfPlaces }}</option>
 {% endfor %}

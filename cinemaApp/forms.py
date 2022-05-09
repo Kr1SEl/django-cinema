@@ -20,8 +20,8 @@ class SessionForm(ModelForm):
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Movie Name'}),
-            'start_time': DateTimePickerInput(format='%d/%m/%Y %H:%M', attrs={'placeholder': 'Start Time'}),
-            'end_time': DateTimePickerInput(format='%d/%m/%Y %H:%M', attrs={'placeholder': 'End Time'}),
+            'start_time': DateTimePickerInput(attrs={'placeholder': 'Start Time'}),
+            'end_time': DateTimePickerInput(attrs={'placeholder': 'End Time'}),
             'description': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Description'}),
         }
 

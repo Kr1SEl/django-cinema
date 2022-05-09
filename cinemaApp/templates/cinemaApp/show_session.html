@@ -46,17 +46,32 @@
                         {% endfor %}
                     </div> {% endcomment %}
                     <center>
+                        <br>
                         <div class="container">
                             <div class="screen"></div>
                             <h4><small class="text-muted">SCREEN</small></h4>
                             <br>
-                        {% for i in 'aaaaaa' %}
+                        
+                            {% for row in cinemaHall %}
+                            <div>
+                            {% for seat in row.1 %}
+                                {% if not seat.isAvaliable %}
+                                    <input type="image" onclick="bookSeat(this.id)" disabled = true id="{{seat}}" value="{{seat.placeNumber}}" src="{% static 'bk.png' %}" style="height: 30px; width: 30px;"/>
+                                {% else %}
+                                    <input type="image" onclick="bookSeat(this.id)"  id="{{seat}} free" value="{{seat.placeNumber}}" src="{% static 'seat.png' %}" style="height: 30px; width: 30px;"/>
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                            {% endfor %}
+                        
+                        {% comment %} {% endfor %} {% endcomment %}
+                        {% comment %} {% for i in 'aaaaaa' %}
                         <div>
                             {% for i in 'aaa' %}
-                            <input type="image" onclick="bookSeat(this.id)" disabled = true id="{{seat}}" value="{{seat.placeNumber}}" src="{% static 'bk.png' %}" style="height: 30px; width: 30px;"/>
+                                <input type="image" onclick="bookSeat(this.id)"  id="{{seat}} free" value="{{seat.placeNumber}}" src="{% static 'seat.png' %}" style="height: 30px; width: 30px;"/>
                             {% endfor %}
                         </div>
-                        {% endfor %}
+                        {% endfor %} {% endcomment %}
                     </center>
                     <form method="POST">
                         {% csrf_token %}
