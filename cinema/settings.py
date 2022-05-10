@@ -27,10 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap_datepicker_plus',
+    'cinemaApp.apps.CinemaappConfig',
     'django_filters',
     'bootstrapform',
     'bootstrap4',
-    'cinemaApp',
     'users'
 ]
 

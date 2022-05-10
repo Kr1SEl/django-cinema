@@ -1,7 +1,7 @@
 {% extends 'cinemaApp/base.html' %} 
 
 {% block content %}
-
+{% load cinemaApp_extras %}
     <center>
         <h1>Avaliable Sessions</h1>
     </center>
@@ -39,15 +39,15 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
         {% if sessions.has_previous%}
-            <li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{sessions.previous_page_number}}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="{% my_url 1 'page' request.GET.urlencode %}">&laquo First</a></li>
+            <li class="page-item"><a class="page-link" href="{% my_url sessions.previous_page_number 'page' request.GET.urlencode %}">Previous</a></li>
 
         {% endif %} 
             <li class="page-item disabled"><a class="page-link" href="#">Page {{sessions.number}} of {{sessions.paginator.num_pages}}</a></li>
 
         {% if sessions.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{sessions.next_page_number}}">Next</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{sessions.paginator.num_pages}}">Last &raquo</a></li>
+            <li class="page-item"><a class="page-link" href="{% my_url sessions.next_page_number 'page' request.GET.urlencode %}">Next</a></li>
+            <li class="page-item"><a class="page-link"  href="{% my_url sessions.paginator.num_pages 'page' request.GET.urlencode %}">Last &raquo</a></li>
         {% endif %}
         </ul>
     </nav>
