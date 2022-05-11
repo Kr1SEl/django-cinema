@@ -11,7 +11,7 @@
     {% for ticket in tickets %}
     <div class="col">
         <div class = "card">
-            <img src="{{ ticket.session.session_image.url }}" class="card-img-top">
+            <img src="{{ ticket.session.session_image.url }}" class="card-img-top" style="max-height:550px;">
             <div class="card-body">
                 <h5 class="card-title">{{ticket.session.name}}</h5>
                 <p class="card-text">Place: {{ticket.placeNumber}}</p>
