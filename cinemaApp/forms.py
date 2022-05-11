@@ -35,7 +35,7 @@ class SessionForm(ModelForm):
         if 'cinema' in self.data:
             try:
                 cinema_id = int(self.data.get('cinema'))
-                self.fields['hall'].queryset = Hall.objects.filter(
-                    cinema_id=cinema_id).order_by('id')
+                self.fields['hall'].queryset = Cinema.objects.get(
+                    id=cinema_id).halls.all()
             except (ValueError, TypeError):
                 pass

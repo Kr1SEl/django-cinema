@@ -110,5 +110,5 @@ def home(request):
 
 def load_halls(request):
     cinema_id = request.GET.get('cinema_id')
-    halls = Hall.objects.filter(cinema_id=cinema_id)
+    halls = Cinema.objects.get(id=cinema_id).halls.all()
     return render(request, 'cinemaApp/hall_dropdown_list_options.html', {'halls': halls})
