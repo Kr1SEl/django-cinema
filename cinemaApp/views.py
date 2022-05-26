@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import timezone
-from django.utils import timezone
 from django.core.paginator import Paginator
 from django.contrib import messages
 from .models import Session, Hall, Cinema, Place
@@ -110,5 +109,9 @@ def home(request):
 
 def load_halls(request):
     cinema_id = request.GET.get('cinema_id')
-    halls = Cinema.objects.get(id=cinema_id).halls.all()
-    return render(request, 'cinemaApp/hall_dropdown_list_options.html', {'halls': halls})
+    if cinema_id == '':
+        halls = Cinema.objects.none()
+        return render(request,  'cinemaApp/hall_dropdown_list_options.html', {'halls': halls})
+    else:
+        halls = Cinema.objects.get(id=cinema_id).halls.all()
+        return render(request, 'cinemaApp/hall_dropdown_list_options.html', {'halls': halls})
