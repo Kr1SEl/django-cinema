@@ -20,7 +20,7 @@ class IWithName(ID):
         abstract = True
 
 
-class Hall(models.Model):
+class Hall(ID):
     sitRows = models.IntegerField(validators=[MinValueValidator(1)])
     sitColumns = models.IntegerField(
         validators=[MaxValueValidator(20), MinValueValidator(1)])
@@ -61,7 +61,7 @@ class Session(IWithName):
         return self.name
 
 
-class Place(models.Model):
+class Place(ID):
     placeNumber = models.IntegerField()
     isAvaliable = models.BooleanField()
     placeHolder = models.IntegerField(null=True, blank=True)
