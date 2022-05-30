@@ -6,6 +6,20 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.translation import gettext_lazy as _
 
 
+class ID(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    class Meta:
+        abstract = True
+
+
+class IWithName(ID):
+    name = models.CharField('Movie Name', max_length=100)
+
+    class Meta:
+        abstract = True
+
+
 class Hall(models.Model):
     sitRows = models.IntegerField(validators=[MinValueValidator(1)])
     sitColumns = models.IntegerField(
@@ -19,16 +33,14 @@ class Hall(models.Model):
         return self.sitRows * self.sitColumns
 
 
-class Cinema(models.Model):
-    name = models.CharField('Cinema Name', max_length=100)
+class Cinema(IWithName):
     halls = models.ManyToManyField(Hall)
 
     def __str__(self):
         return f'Cinema Name: {self.name}'
 
 
-class Session(models.Model):
-    name = models.CharField('Movie Name', max_length=100)
+class Session(IWithName):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     description = models.TextField(blank=True)
